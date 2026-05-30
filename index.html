@@ -152,64 +152,67 @@
     }
 
     /* ════════════════════════════════
-       HERO
+       HERO — matches original layout exactly
     ════════════════════════════════ */
     #home {
       min-height: 100vh;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center;
-      padding: 130px 24px 90px;
+      padding: 100px 24px 80px;
       position: relative;
     }
 
-    /* ── "ART OF MARK" — Fontspring DEMO Modica Black ── */
+    /* "ART OF MARK" — Modica Black, fixed size matching original */
     .hero-name {
       font-family: 'Modica', 'Archivo Black', sans-serif;
       font-weight: 900;
-      font-size: clamp(3rem, 12vw, 8rem);
-      line-height: .94;
-      letter-spacing: -.01em;
+      font-size: 3.6rem;
+      line-height: 1;
+      letter-spacing: .01em;
       text-transform: uppercase;
       color: var(--black);
     }
 
-    /* ── "MARK JOHN RAPACON" — Poppins SemiBold wide tracking ── */
+    /* "MARK JOHN RAPACON" — small widely-spaced caps */
     .hero-byline {
       font-family: var(--font-body);
-      font-weight: 600;
-      font-size: clamp(.65rem, 1.8vw, .82rem);
-      letter-spacing: .3em;
+      font-weight: 500;
+      font-size: .72rem;
+      letter-spacing: .35em;
       text-transform: uppercase;
       color: var(--black);
-      margin-top: 12px;
+      margin-top: 10px;
     }
 
-    /* ── "VIDEOGRAPHER | PHOTOGRAPHER" — Poppins Bold tighter ── */
+    /* "VIDEOGRAPHER | PHOTOGRAPHER" */
     .hero-role {
       font-family: var(--font-body);
       font-weight: 700;
-      font-size: clamp(.58rem, 1.4vw, .72rem);
-      letter-spacing: .2em;
+      font-size: .65rem;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--black);
-      margin-top: 5px;
+      margin-top: 4px;
     }
 
-    /* contact row */
+    /* contact row — compact, single line */
     .hero-contacts {
       display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 12px 26px; margin-top: 28px;
+      align-items: center;
+      gap: 6px 22px;
+      margin-top: 20px;
     }
     .hero-contacts a {
-      display: flex; align-items: center; gap: 6px;
+      display: flex; align-items: center; gap: 5px;
       font-family: var(--font-body);
-      font-size: .72rem; font-weight: 400;
+      font-size: .68rem; font-weight: 400;
       color: var(--black);
       transition: opacity .2s;
+      white-space: nowrap;
     }
     .hero-contacts a:hover { opacity: .5; }
-    .hero-contacts i { font-size: .9rem; }
+    .hero-contacts i { font-size: .85rem; }
 
     /* bounce arrow */
     .scroll-arrow {
@@ -464,8 +467,8 @@
     <p class="hero-role">Videographer&nbsp;|&nbsp;Photographer</p>
 
     <div class="hero-contacts">
-      <a href="https://www.behance.net/mark123" target="_blank" rel="noopener">
-        <i class="bi bi-behance"></i> @mark123
+      <a href="https://www.facebook.com/mark123" target="_blank" rel="noopener">
+        <i class="bi bi-facebook"></i> @mark123
       </a>
       <a href="https://www.linkedin.com/in/mark123" target="_blank" rel="noopener">
         <i class="bi bi-linkedin"></i> @mark123
