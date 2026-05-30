@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Art of Mark – Mark John Rapacon</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <!-- Poppins from Google Fonts (body / UI text) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet"/>
+  <!-- Dancing Script for portfolio captions -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ─────────────────────────────────────────────
+       FONTSPRING DEMO – Modica
+       Place all .otf files in the same folder as
+       this HTML file to activate the exact font.
+       Falls back to "Archivo Black" when missing.
+
+       Expected filenames (standard Fontspring naming):
+         Fontspring-DEMO-modica-black.otf
+         Fontspring-DEMO-modica-bold.otf
+         Fontspring-DEMO-modica-semibold.otf
+         Fontspring-DEMO-modica-medium.otf
+         Fontspring-DEMO-modica-regular.otf
+         Fontspring-DEMO-modica-light.otf
+
+       If your files have slightly different names,
+       update the url() values below to match exactly.
+    ───────────────────────────────────────────── */
+
+    /* Black — hero "ART OF MARK" */
+    @font-face {
+      font-family: 'Modica';
+      src: url('Fontspring-DEMO-modica-black.otf') format('opentype');
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    /* Bold — section titles */
+    @font-face {
+      font-family: 'Modica';
+      src: url('Fontspring-DEMO-modica-bold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    /* SemiBold — nav logo, byline */
+    @font-face {
+      font-family: 'Modica';
+      src: url('Fontspring-DEMO-modica-semibold.otf') format('opentype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    /* Medium */
+    @font-face {
+      font-family: 'Modica';
+      src: url('Fontspring-DEMO-modica-medium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    /* Regular */
+    @font-face {
+      font-family: 'Modica';
+      src: url('Fontspring-DEMO-modica-regular.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    /* Light */
+    @font-face {
+      font-family: 'Modica';
+      src: url('Fontspring-DEMO-modica-light.otf') format('opentype');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ── CSS Variables ── */
+    :root {
+      --black:   #0a0a0a;
+      --white:   #f9f7f4;
+      --gray:    #888;
+      --light:   #e5e2dc;
+      --radius:  14px;
+      /* Font stacks */
+      --font-display: 'Modica', 'Archivo Black', sans-serif;
+      --font-body:    'Poppins', sans-serif;
+    }
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+    img { display: block; width: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ════════════════════════════════
+       NAVBAR
+    ════════════════════════════════ */
+    #mainNav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      padding: 14px 44px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(249,247,244,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: box-shadow .3s;
+    }
+    #mainNav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+
+    .nav-logo {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 8px;
+    }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: .8rem; font-weight: 400;
+      letter-spacing: .03em;
+      color: var(--black); opacity: .75;
+      transition: opacity .2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      flex-direction: column; gap: 5px;
+    }
+    .nav-toggle span {
+      display: block; width: 24px; height: 2px;
+      background: var(--black); border-radius: 2px;
+    }
+
+    /* ════════════════════════════════
+       HERO
+    ════════════════════════════════ */
+    #home {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 130px 24px 90px;
+      position: relative;
+    }
+
+    /* ── "ART OF MARK" — Fontspring DEMO Modica Black ── */
+    .hero-name {
+      font-family: 'Modica', 'Archivo Black', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3rem, 12vw, 8rem);
+      line-height: .94;
+      letter-spacing: -.01em;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+
+    /* ── "MARK JOHN RAPACON" — Poppins SemiBold wide tracking ── */
+    .hero-byline {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: clamp(.65rem, 1.8vw, .82rem);
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-top: 12px;
+    }
+
+    /* ── "VIDEOGRAPHER | PHOTOGRAPHER" — Poppins Bold tighter ── */
+    .hero-role {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: clamp(.58rem, 1.4vw, .72rem);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-top: 5px;
+    }
+
+    /* contact row */
+    .hero-contacts {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 12px 26px; margin-top: 28px;
+    }
+    .hero-contacts a {
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--font-body);
+      font-size: .72rem; font-weight: 400;
+      color: var(--black);
+      transition: opacity .2s;
+    }
+    .hero-contacts a:hover { opacity: .5; }
+    .hero-contacts i { font-size: .9rem; }
+
+    /* bounce arrow */
+    .scroll-arrow {
+      position: absolute; bottom: 36px; left: 50%;
+      transform: translateX(-50%);
+      width: 36px; height: 36px;
+      background: var(--black); border-radius: 50%; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-size: 1rem;
+      animation: bounce 2s ease-in-out infinite;
+      transition: background .2s;
+    }
+    .scroll-arrow:hover { background: #333; }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ════════════════════════════════
+       SECTION TITLE
+       IntegralCF Bold — "Portfolio" "Services" "About Me"
+    ════════════════════════════════ */
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: .08em;
+      text-align: center;
+      text-transform: capitalize;
+      margin-bottom: 36px;
+      color: var(--black);
+    }
+
+    /* ════════════════════════════════
+       PORTFOLIO
+    ════════════════════════════════ */
+    #portfolio { padding: 100px 40px; }
+
+    .portfolio-tabs {
+      display: flex; margin-bottom: 24px;
+      border-bottom: 1px solid rgba(0,0,0,0.12);
+    }
+    .tab-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: var(--font-body);
+      font-size: .75rem; font-weight: 500;
+      letter-spacing: .04em;
+      padding: 6px 20px 10px;
+      color: var(--gray);
+      position: relative; transition: color .2s;
+    }
+    .tab-btn::after {
+      content: ''; position: absolute; bottom: -1px; left: 0;
+      width: 100%; height: 2px; background: var(--black);
+      transform: scaleX(0); transition: transform .25s;
+    }
+    .tab-btn.active { color: var(--black); }
+    .tab-btn.active::after { transform: scaleX(1); }
+    /* first tab has underline by default — matches design */
+    .tab-btn:first-child { padding-left: 0; }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .portfolio-item {
+      border-radius: 2px; overflow: hidden;
+      aspect-ratio: 2/3; background: var(--light);
+      position: relative; cursor: pointer;
+    }
+    .portfolio-item img {
+      height: 100%; width: 100%; object-fit: cover;
+      transition: transform .6s ease;
+      display: block;
+    }
+    .portfolio-item:hover img,
+    .portfolio-item.tapped img { transform: scale(1.06); }
+
+    /* gradient overlay */
+    .portfolio-item .p-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 35%,
+        rgba(0,0,0,0.15) 60%,
+        rgba(0,0,0,0.65) 100%
+      );
+      opacity: 0;
+      transition: opacity .4s ease;
+    }
+    .portfolio-item:hover .p-overlay,
+    .portfolio-item.tapped .p-overlay { opacity: 1; }
+
+    /* caption */
+    .portfolio-item .p-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 16px 14px 22px;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: opacity .4s ease, transform .4s ease;
+      text-align: center;
+      pointer-events: none;
+    }
+    .portfolio-item:hover .p-caption,
+    .portfolio-item.tapped .p-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .p-caption .p-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: .02em;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.5);
+      display: block;
+      margin-bottom: 3px;
+    }
+    .p-caption .p-desc {
+      font-family: var(--font-body);
+      font-size: .6rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      display: block;
+    }
+
+    /* ════════════════════════════════
+       SERVICES
+    ════════════════════════════════ */
+    #services { padding: 90px 40px 100px; }
+
+    .services-lead {
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: .75rem; font-weight: 300;
+      color: #555; max-width: 600px;
+      margin: -18px auto 50px;
+      line-height: 1.75;
+    }
+
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+    }
+
+    .service-img {
+      height: 210px; overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--light);
+    }
+    .service-img img { height: 100%; transition: transform .5s; }
+    .service-card:hover .service-img img { transform: scale(1.06); }
+
+    /* "Wedding Coverage" — Poppins Regular light weight like original */
+    .service-card h3 {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: .95rem;
+      letter-spacing: .01em;
+      margin-top: 14px; margin-bottom: 10px;
+      color: var(--black);
+    }
+    .service-card p {
+      font-family: var(--font-body);
+      font-size: .7rem; font-weight: 300;
+      color: #444; line-height: 1.8;
+    }
+
+    /* ════════════════════════════════
+       ABOUT
+    ════════════════════════════════ */
+    #about { padding: 90px 40px 100px; }
+
+    .about-inner {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px;
+      align-items: start; max-width: 1080px; margin: 0 auto;
+    }
+    .about-img-wrap {
+      border-radius: 2px; overflow: hidden;
+      aspect-ratio: 3/4; background: var(--light);
+    }
+    .about-img-wrap img { height: 100%; }
+
+    .about-text p {
+      font-family: var(--font-body);
+      font-size: .72rem; font-weight: 300;
+      color: #333; line-height: 1.9;
+      margin-bottom: 18px;
+      text-align: justify;
+    }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    footer {
+      border-top: 1px solid var(--light);
+      text-align: center; padding: 24px;
+      font-family: var(--font-body);
+      font-size: .68rem; font-weight: 300;
+      letter-spacing: .06em; color: #888;
+    }
+
+    /* ════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════ */
+    @media (max-width: 768px) {
+      #mainNav { padding: 14px 20px; }
+      .nav-links {
+        position: fixed; top: 0; right: -100%; width: 72vw; height: 100vh;
+        background: var(--white); flex-direction: column;
+        justify-content: center; align-items: center; gap: 38px;
+        transition: right .35s ease; box-shadow: -4px 0 32px rgba(0,0,0,.1);
+        z-index: 999;
+      }
+      .nav-links.open { right: 0; }
+      .nav-links a { font-size: .95rem; opacity: 1; }
+      .nav-toggle { display: flex; }
+      .portfolio-grid { grid-template-columns: 1fr 1fr; }
+      .services-grid  { grid-template-columns: 1fr; }
+      .about-inner    { grid-template-columns: 1fr; gap: 32px; }
+      #portfolio, #services, #about { padding: 70px 20px; }
+    }
+    @media (max-width: 480px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .hero-contacts  { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════ NAVBAR ══════════════════ -->
+  <nav id="mainNav">
+    <div class="nav-logo">AOM</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home"      onclick="closeMenu()">Home</a></li>
+      <li><a href="#portfolio" onclick="closeMenu()">Portfolio</a></li>
+      <li><a href="#services"  onclick="closeMenu()">Services</a></li>
+      <li><a href="#about"     onclick="closeMenu()">About</a></li>
+      <li><a href="#contact"   onclick="closeMenu()">Contact Me</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section id="home">
+    <h1 class="hero-name">Art of Mark</h1>
+    <p class="hero-byline">Mark John Rapacon</p>
+    <p class="hero-role">Videographer&nbsp;|&nbsp;Photographer</p>
+
+    <div class="hero-contacts">
+      <a href="https://www.behance.net/mark123" target="_blank" rel="noopener">
+        <i class="bi bi-behance"></i> @mark123
+      </a>
+      <a href="https://www.linkedin.com/in/mark123" target="_blank" rel="noopener">
+        <i class="bi bi-linkedin"></i> @mark123
+      </a>
+      <a href="mailto:mjrapaconpogi@gmail.com">
+        <i class="bi bi-envelope"></i> mjrapaconpogi@gmail.com
+      </a>
+      <a href="tel:+639123456789">
+        <i class="bi bi-telephone"></i> 09123456789
+      </a>
+    </div>
+
+    <button class="scroll-arrow" id="scrollArrow" aria-label="Scroll down">
+      <i class="bi bi-chevron-down"></i>
+    </button>
+  </section>
+
+  <!-- ══════════════════ PORTFOLIO ══════════════════ -->
+  <section id="portfolio">
+    <p class="section-title">Portfolio</p>
+
+    <div class="portfolio-tabs" id="portfolioTabs">
+      <button class="tab-btn active" data-tab="wedding">Wedding</button>
+      <button class="tab-btn"        data-tab="debut">Debut</button>
+      <button class="tab-btn"        data-tab="others">Others</button>
+    </div>
+
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+  </section>
+
+  <!-- ══════════════════ SERVICES ══════════════════ -->
+  <section id="services">
+    <p class="section-title">Services</p>
+    <p class="services-lead">Here are some of the photography services we offer that we can customize or tailor to best fit your needs.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Wedding Coverage"/>
+        </div>
+        <h3>Wedding Coverage</h3>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&q=80" alt="Engagement Sessions"/>
+        </div>
+        <h3>Engagement Sessions</h3>
+        <p>In our engagement sessions, we use natural light and cool colors to create a serene, romantic atmosphere. We'll capture your happy moments ensuring each smile and cuddle reflects your love. Whether indoors or outdoors, our goal is to create captivating photos that truly represent your bond.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80" alt="Portrait Session"/>
+        </div>
+        <h3>Portrait Session</h3>
+        <p>Our portrait sessions offer clean and elegant portraits tailored to couples or individuals. We focus on capturing your unique style and personality with professionalism. Whether you're seeking romantic couple portraits or striking individual shots, we ensure the end result matches your vision. Our goal is to deliver beautiful, timeless portraits you'll cherish.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ ABOUT ══════════════════ -->
+  <section id="about">
+    <p class="section-title">About Me</p>
+
+    <div class="about-inner">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Mark John Rapacon"/>
+      </div>
+      <div class="about-text">
+        <p>Our wedding photography captures the essence of your special day with a natural, clean look. Using natural light, we'll create timeless images brimming with warmth and joy. From vows to loving glances, every moment is meticulously documented, reflecting the beauty of your surroundings. Our photos tell your love story in an enchanting and unforgettable way.</p>
+        <p>Our wedding photography captures the essence of your special day with a natural, clean look. Using natural light, we'll create timeless images brimming with warmth and joy. From vows to loving glances, every moment is meticulously documented, reflecting the beauty of your surroundings. Our photos tell your love story in an enchanting and unforgettable way.</p>
+        <p>Our wedding photography captures the essence of your special day with a natural, clean look. Using natural light, we'll create timeless images brimming with warmth and joy. From vows to loving glances, every moment is meticulously documented, reflecting the beauty of your surroundings. Our photos tell your love story in an enchanting and unforgettable way.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="contact" style="height:1px;"></div>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer>
+    &copy; 2026 Art. All rights reserved.
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* ── Portfolio data: src, name caption, description ── */
+    const portfolioData = {
+      wedding: [
+        { src: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&h=900&fit=crop&q=80', name: 'Andre and Angela', desc: 'Batangas · 2024' },
+        { src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=900&fit=crop&q=80', name: 'Marco and Isabel', desc: 'Tagaytay · 2024' },
+        { src: 'https://images.unsplash.com/photo-1550005809-91ad75fb315f?w=600&h=900&fit=crop&q=80', name: 'James and Sofia', desc: 'Palawan · 2023' },
+        { src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&h=900&fit=crop&q=80', name: 'Luis and Maria', desc: 'Cebu · 2023' },
+        { src: 'https://images.unsplash.com/photo-1529636798458-92182e662485?w=600&h=900&fit=crop&q=80', name: 'Carlo and Dianne', desc: 'Manila · 2023' },
+        { src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=900&fit=crop&q=80', name: 'Ryan and Kaye', desc: 'Boracay · 2022' },
+      ],
+      debut: [
+        { src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=900&fit=crop&q=80', name: 'Bianca', desc: '18th Birthday · Makati' },
+        { src: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=600&h=900&fit=crop&q=80', name: 'Camille', desc: '18th Birthday · BGC' },
+        { src: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=900&fit=crop&q=80', name: 'Patricia', desc: '18th Birthday · Quezon City' },
+        { src: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600&h=900&fit=crop&q=80', name: 'Samantha', desc: '18th Birthday · Pasig' },
+        { src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=900&fit=crop&q=80', name: 'Clarisse', desc: '18th Birthday · Alabang' },
+        { src: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=600&h=900&fit=crop&q=80', name: 'Nicole', desc: '18th Birthday · Ortigas' },
+      ],
+      others: [
+        { src: 'https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=600&h=900&fit=crop&q=80', name: 'Reyes Family', desc: 'Family Portrait · 2024' },
+        { src: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=900&fit=crop&q=80', name: 'Miguel Santos', desc: 'Headshot · 2024' },
+        { src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=900&fit=crop&q=80', name: 'Alex Rivera', desc: 'Portrait · 2023' },
+        { src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=900&fit=crop&q=80', name: 'Daniel Cruz', desc: 'Corporate · 2023' },
+        { src: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=600&h=900&fit=crop&q=80', name: 'Jerome Tan', desc: 'Portrait · 2023' },
+        { src: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=900&fit=crop&q=80', name: 'Paolo Lim', desc: 'Lifestyle · 2022' },
+      ],
+    };
+
+    function renderPortfolio(tab) {
+      const grid = document.getElementById('portfolioGrid');
+      grid.innerHTML = '';
+      portfolioData[tab].forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'portfolio-item';
+        el.innerHTML = `
+          <img src="${item.src}" alt="${item.name}" loading="lazy"/>
+          <div class="p-overlay"></div>
+          <div class="p-caption">
+            <span class="p-name">${item.name}</span>
+            <span class="p-desc">${item.desc}</span>
+          </div>`;
+        /* tap support for mobile */
+        el.addEventListener('touchstart', () => {
+          document.querySelectorAll('.portfolio-item.tapped').forEach(t => {
+            if (t !== el) t.classList.remove('tapped');
+          });
+          el.classList.toggle('tapped');
+        }, { passive: true });
+        grid.appendChild(el);
+      });
+    }
+
+    document.getElementById('portfolioTabs').addEventListener('click', e => {
+      const btn = e.target.closest('.tab-btn');
+      if (!btn) return;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderPortfolio(btn.dataset.tab);
+    });
+
+    renderPortfolio('wedding');
+
+    /* Scroll arrow */
+    document.getElementById('scrollArrow').addEventListener('click', () => {
+      document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    /* Navbar shadow */
+    window.addEventListener('scroll', () => {
+      document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    /* Mobile nav */
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+    function closeMenu() {
+      document.getElementById('navLinks').classList.remove('open');
+    }
+  </script>
+</body>
+</html>
